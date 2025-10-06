@@ -7,7 +7,7 @@ variable "project" {
 variable "region" {
   description = "AWS region for backend resources"
   type        = string
-  default     = "eu-west-1"
+  default     = "eu-west-2"
 }
 
 variable "tags" {

@@ -124,3 +124,8 @@ State and sensitive local files are ignored by default.
 - Use **separate `key` prefixes** per environment/workspace to limit blast radius.
 - Consider a **dedicated account** for shared services like state.
 - Rotate the CMK per policy and monitor CloudTrail for access.
+
+
+## TODO
+
+- It would be really cool if we can structure the output as a code block for a Terraform setup

@@ -5,13 +5,17 @@ resource "aws_iam_role" "backend" {
   tags               = local.tags
 }
 
+data "aws_caller_identity" "current" {}
+
 data "aws_iam_policy_document" "backend_assume_role" {
   statement {
     actions = ["sts:AssumeRole"]
 
     principals {
-      type        = "AWS"
-      identifiers = var.principal_arns
+      type = "AWS"
+      identifiers = length(var.principal_arns) > 0 ? var.principal_arns : [
+        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+      ]
     }
   }
 }
@@ -75,7 +79,7 @@ resource "aws_iam_role_policy_attachment" "backend_attach" {
 }
 
 # KMS key policy allowing account root and optional extra admins
-data "aws_caller_identity" "current" {}
+
 
 resource "aws_kms_key_policy" "state" {
   key_id = aws_kms_key.state.key_id
